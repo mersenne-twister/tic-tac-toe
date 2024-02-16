@@ -1,3 +1,6 @@
+mod board;
+mod command;
+
 use {
     board::{Board, Size, TicTac, Wins},
     clap::{Parser, ValueEnum},
@@ -6,8 +9,6 @@ use {
     std::{cmp, fmt::Debug, io, process},
 };
 
-mod board;
-mod command;
 //TODO: move all command related stuff into command
 
 /// Tic-tac-toe game with 1 and 2 player modes
