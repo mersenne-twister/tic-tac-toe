@@ -1,15 +1,10 @@
-use board::Board;
-use board::Size;
-use board::TicTac;
-use clap::Parser;
-use clap::ValueEnum;
-use board::Wins;
-use core::fmt;
-use rand::Rng;
-use std::cmp;
-use std::fmt::Debug;
-use std::io;
-use std::process;
+use {
+    board::{Board, Size, TicTac, Wins},
+    clap::{Parser, ValueEnum},
+    core::fmt,
+    rand::Rng,
+    std::{cmp, fmt::Debug, io, process},
+};
 
 mod board;
 mod command;
@@ -55,8 +50,8 @@ enum FirstTurn {
 
 impl FirstTurn {
     fn get_tic_tac(&self) -> TicTac {
-    //TODO: implement a match for all first_turn's
-    rand::thread_rng().gen()
+        //TODO: implement a match for all first_turn's
+        rand::thread_rng().gen()
     }
 }
 
@@ -119,7 +114,8 @@ pub fn run(args: Args) {
             // "2" | "x" => { if board.try_mark(7, &turn).is_err() { continue;}},
             // "3" | "c" => { if board.try_mark(8, &turn).is_err() { continue;}},
 
-            match input.trim() { //TODO: make this more concise with a match
+            match input.trim() {
+                //TODO: make this more concise with a match
                 "7" | "q" => {
                     if board.try_mark(0, &turn).is_err() {
                         continue;
@@ -194,14 +190,14 @@ pub fn run(args: Args) {
 
             if let Some(winner) = board.winner() {
                 wins.add(winner);
-                
+
                 if cmp::max(wins.get(TicTac::X), wins.get(TicTac::O)) < args.out_of {
                     Board::new().print(&Size::Large);
                 }
 
                 println!("{} won the match in {} turns!", winner, num_turns);
                 wait_for_enter(&mut input);
-                
+
                 break;
             } else if num_turns >= 9 {
                 println!("The match was a scratch, and there was no winner.");
@@ -212,12 +208,13 @@ pub fn run(args: Args) {
                 Board::new().print(&Size::Large);
 
                 break;
-            } 
+            }
         }
     }
 
     if args.out_of > 1 {
-        println!("\
+        println!(
+            "\
 The overall winner is {}, with {} wins, while {} had {} wins;
 while there were {} scratches.",
             wins.winner(),

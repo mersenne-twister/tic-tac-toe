@@ -24,10 +24,7 @@ pub struct Wins {
 
 impl Wins {
     pub fn new() -> Wins {
-        Wins {
-            x: 0,
-            o: 0,
-        }
+        Wins { x: 0, o: 0 }
     }
 }
 
