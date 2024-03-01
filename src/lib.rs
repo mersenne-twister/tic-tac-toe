@@ -192,12 +192,13 @@ pub fn run(args: Args) {
             if let Some(winner) = board.winner() {
                 wins.add(winner);
 
+                board.print(&Size::Large);                
+                println!("{} won the match in {} turns!", winner, num_turns);
+                wait_for_enter(&mut input);
+                
                 if cmp::max(wins.get(TicTac::X), wins.get(TicTac::O)) < args.out_of {
                     Board::new().print(&Size::Large);
                 }
-
-                println!("{} won the match in {} turns!", winner, num_turns);
-                wait_for_enter(&mut input);
 
                 break;
             } else if num_turns >= 9 {
